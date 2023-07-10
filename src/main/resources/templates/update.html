@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
+    <table>
+        <tr>
+            <td>
+                <label for="username">Enter username: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{username}" id="username"/>
+                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username Error
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Enter password: </label>
+            </td>
+            <td>
+                <input type="password" th:field="*{password}" id="password"/>
+                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Enter email: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{email}" id="email"/>
+                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+        <label for="role">Enter role: </label>
+            </td>
+            <td>
+        <select th:field="*{roles}" id="role">
+            <option value="1">Пользователь</option>
+            <option value="2">Администратор</option>
+        </select>
+        <div class="error-message" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Ошибка выбора роли</div>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Update!"/>
+</form>
+<a th:href="@{/logout}">Выход</a>
+<a th:href="@{/admin/users}">Назад</a>
+
+</body>
+</html>

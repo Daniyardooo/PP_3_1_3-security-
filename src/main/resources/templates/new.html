@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/users}" th:object="${user}">
+    <table>
+        <tr>
+            <td>
+                <label for="name">Enter name:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{username}" id="name"/>
+                <div class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="age">Enter password: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{password}" id="age"/>
+                <div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Enter email:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{email}" id="email"/>
+                <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="role">Enter role:</label>
+            </td>
+            <td>
+                <select th:field="*{roles}" id="role">
+                    <option value="1">Пользователь</option>
+                    <option value="2">Администратор</option>
+                </select>
+                <div class="error-message" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Ошибка выбора роли</div>
+            </td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+<a th:href="@{/logout}">Выход</a>
+<a th:href="@{/admin/users}">Назад</a>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<body>-->
+
+<!--<form th:method="POST" th:action="@{/people}" th:object="${user}">-->
+<!--    <label for="name">Enter name: </label>-->
+<!--    <input type="text" th:field="*{name}" id="name"/>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>-->
+<!--    <br/>-->
+<!--    <label for="age">Enter age: </label>-->
+<!--    <input type="text" th:field="*{age}" id="age"/>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>-->
+<!--    <br/>-->
+<!--    <label for="email">Enter email: </label>-->
+<!--    <input type="text" th:field="*{email}" id="email"/>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>-->
+<!--    <br/>-->
+<!--    <input type="submit" value="Create!"/>-->
+<!--</form>-->
+
+<!--</body>-->
