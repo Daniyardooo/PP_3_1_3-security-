@@ -23,7 +23,8 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetails {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userServiceImpl.findByUsername(username);

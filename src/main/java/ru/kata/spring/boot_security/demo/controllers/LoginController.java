@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginController {
 
-    @GetMapping("/")
-    public String getIndex() {
-        return "index";
-    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
