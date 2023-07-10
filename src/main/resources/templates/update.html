@@ -6,15 +6,15 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:action="@{/admin/users/{id}(id=${user.getId()})}" th:method="PATCH" th:object="${user}">
     <table>
         <tr>
             <td>
                 <label for="username">Enter username: </label>
             </td>
             <td>
-                <input type="text" th:field="*{username}" id="username"/>
-                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username Error
+                <input id="username" th:field="*{username}" type="text"/>
+                <div style="color:red" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">username Error
                 </div>
             </td>
         </tr>
@@ -23,8 +23,8 @@
                 <label for="password">Enter password: </label>
             </td>
             <td>
-                <input type="password" th:field="*{password}" id="password"/>
-                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error
+                <input id="password" th:field="*{password}" type="password"/>
+                <div style="color:red" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">password Error
                 </div>
             </td>
         </tr>
@@ -33,20 +33,22 @@
                 <label for="email">Enter email: </label>
             </td>
             <td>
-                <input type="text" th:field="*{email}" id="email"/>
-                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                <input id="email" th:field="*{email}" type="text"/>
+                <div style="color:red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</div>
             </td>
         </tr>
         <tr>
             <td>
-        <label for="role">Enter role: </label>
+                <label for="role">Enter role: </label>
             </td>
             <td>
-        <select th:field="*{roles}" id="role">
-            <option value="1">Пользователь</option>
-            <option value="2">Администратор</option>
-        </select>
-        <div class="error-message" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Ошибка выбора роли</div>
+                <select id="role" th:field="*{roles}">
+                    <option value="1">Пользователь</option>
+                    <option value="2">Администратор</option>
+                </select>
+                <div class="error-message" th:errors="*{roles}" th:if="${#fields.hasErrors('roles')}">Ошибка выбора
+                    роли
+                </div>
             </td>
         </tr>
     </table>
