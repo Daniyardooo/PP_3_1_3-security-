@@ -39,15 +39,10 @@
         </tr>
         <tr>
             <td>
-                <label for="role">Enter role: </label>
-            </td>
-            <td>
-                <select id="role" th:field="*{roles}">
-                    <option value="1">Пользователь</option>
-                    <option value="2">Администратор</option>
-                </select>
+                <label><input th:field="*{roles}" type="checkbox" value="1"> Пользователь</label><br>
+                <label><input th:field="*{roles}" type="checkbox" value="2"> Администратор</label>
                 <div class="error-message" th:errors="*{roles}" th:if="${#fields.hasErrors('roles')}">Ошибка выбора
-                    роли
+                    ролей
                 </div>
             </td>
         </tr>

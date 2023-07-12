@@ -14,12 +14,16 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao;
-    private final PasswordEncoder bCryptPasswordEncoder;
+    private UserDao userDao;
+    private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, PasswordEncoder bCryptPasswordEncoder) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setBCryptPasswordEncoder(PasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 

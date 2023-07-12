@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,11 +17,11 @@ import ru.kata.spring.boot_security.demo.service.CustomUserDetails;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomUserDetails customUserDetailsServiceImpl;
+    private CustomUserDetails customUserDetailsServiceImpl;
     private SuccessUserHandler successUserHandler;
 
-
-    public WebSecurityConfig(@Lazy CustomUserDetails customUserDetailsServiceImpl) {
+    @Autowired
+    public void setCustomUserDetailsServiceImpl(CustomUserDetails customUserDetailsServiceImpl) {
         this.customUserDetailsServiceImpl = customUserDetailsServiceImpl;
     }
 
@@ -52,19 +51,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsServiceImpl).passwordEncoder(PasswordEncoder());
+        auth.userDetailsService(customUserDetailsServiceImpl);
     }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setPasswordEncoder(PasswordEncoder());
         authenticationProvider.setUserDetailsService(customUserDetailsServiceImpl);
         return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder PasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

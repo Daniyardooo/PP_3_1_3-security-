@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 
@@ -16,18 +17,17 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsServiceImpl implements CustomUserDetails {
 
-    private UserServiceImpl userServiceImpl;
+    private UserDao userDao;
 
     @Autowired
-    public void setUserService(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public void setUserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Transactional(readOnly = true)
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userServiceImpl.findByUsername(username);
+        User user = userDao.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");

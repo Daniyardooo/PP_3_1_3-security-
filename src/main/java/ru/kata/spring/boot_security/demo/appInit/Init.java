@@ -40,7 +40,7 @@ public class Init {
         roles.add(userRole);
         roles.add(adminRole);
         User user = new User("Daniyardo", "$2a$12$dzR9OqICVGrCv.rGT6bPE.5B3pX0V16UGptogtkvKeAZd3T8j0nfq",
-                "danhas@mail.ru", roles);
+                "danhas@mail.ru", roles); // password: 123456
         userDao.save(user);
     }
 }
